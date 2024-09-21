@@ -10,7 +10,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:4000/api/login', { email, password });
+      const res = await axios.post('https://calendarly.onrender.com/api/login', { email, password });
       localStorage.setItem('token', res.data.token);
       navigate('/');
     } catch (error) {

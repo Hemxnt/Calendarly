@@ -10,7 +10,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:4000/api/register', { email, password });
+      await axios.post('https://calendarly.onrender.com/api/register', { email, password });
       navigate('/login');
     } catch (error) {
       alert('Registration failed. ',error);

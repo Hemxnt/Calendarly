@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const Calendar = ({ events, setEditingEvent }) => {
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:4000/api/events/${id}`, {
+    await axios.delete(`https://calendarly.onrender.com/api/events/${id}`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     });
     window.location.reload();

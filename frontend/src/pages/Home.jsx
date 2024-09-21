@@ -10,7 +10,7 @@ const Home = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await axios.get('http://localhost:4000/api/events', {
+        const res = await axios.get('https://calendarly.onrender.com/api/events', {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         setEvents(res.data);

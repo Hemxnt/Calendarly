@@ -32,7 +32,7 @@ const EventForm = ({ events, setEvents, editingEvent, setEditingEvent }) => {
       if (editingEvent) {
         // Update existing event
         const res = await axios.put(
-          `http://localhost:4000/api/events/${editingEvent.id}`,
+          `https://calendarly.onrender.com/api/events/${editingEvent.id}`,
           { title, description, dateTime: formattedDateTime },
           config
         );
@@ -41,7 +41,7 @@ const EventForm = ({ events, setEvents, editingEvent, setEditingEvent }) => {
       } else {
         // Create new event
         const res = await axios.post(
-          'http://localhost:4000/api/events',
+          'https://calendarly.onrender.com/api/events',
           { title, description, dateTime: formattedDateTime },
           config
         );
