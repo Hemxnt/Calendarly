@@ -22,11 +22,23 @@ const Home = () => {
     fetchEvents();
   }, []);
 
+  // const prevPost = () => {
+
+  // }
+
+  // const nextPost = () => {
+
+  // }
+
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">Your Calendar</h1>
       <EventForm events={events} setEvents={setEvents} editingEvent={editingEvent} setEditingEvent={setEditingEvent} />
       <Calendar events={events} setEditingEvent={setEditingEvent} />
+      <div>
+        <button >Prev</button>
+        <button>Next</button>
+      </div>
     </div>
   );
 };

@@ -1,8 +1,43 @@
 const prisma = require('../prisma');
 
 const getEvents = async (req, res) => {
-  const events = await prisma.event.findMany({ where: { userId: req.userId } });
-  res.json(events);
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+
+    // Calculate the starting index (skip)
+    const skip = (page - 1) * limit;
+
+    // Fetch products with pagination
+    // Fetch the total count of events (for pagination metadata)
+    const totalEvents = await prisma.event.count({
+      where: { userId: req.user.id }, // Assuming userId is stored in req.user from JWT
+    });
+
+    // Fetch paginated events
+    const events = await prisma.event.findMany({
+      where: { userId: req.user.id },
+      skip: skip,
+      take: limit,
+      orderBy: { date: 'asc' }, // Order by event date (optional)
+    });
+
+    // Calculate the total number of pages
+    const totalPages = Math.ceil(totalEvents / limit);
+
+    // Send response with events and pagination data
+    res.status(200).json({
+      events,
+      pagination: {
+        currentPage: page,
+        totalPages,
+        totalEvents,
+      },
+    });
+} catch (err) {
+    res.status(500).json({ message: 'Server Error', error: err });
+}
+  
 };
 
 const createEvent = async (req, res) => {
